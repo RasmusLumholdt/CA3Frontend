@@ -12,44 +12,47 @@ class LoggedIn extends Component {
   componentDidMount() {
     facade.fetchData().then(res => this.setState({ dataFromServer: res }));
   }
+
+  logout = () => {
+    this.props.logout();
+  }
+
   render() {
     return (
       <Router>
         <div>
-
-
-
-
-          <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container">
-              <NavLink className="navbar-brand" exact to="/">CA2</NavLink>
-              <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                  <li class="nav-item">
+              <NavLink className="navbar-brand" exact to="/">CA3</NavLink>
+              <div className="collapse navbar-collapse" id="navbarNav">
+                <ul className="navbar-nav">
+                  <li className="nav-item">
                     <NavLink className="nav-link" exact to="/">Welcome</NavLink>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink className="nav-link" to="/endpoint1">Endpoint 1</NavLink>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink className="nav-link" to="#">Endpoint 2</NavLink>
                   </li>
-                  <li class="nav-item">
+                  <li className="nav-item">
                     <NavLink className="nav-link" to="#">Endpoint 3</NavLink>
                   </li>
-                  <li>
+                  <li className="nav-item">
                     <NavLink className="nav-link" to="#">Endpoint 4</NavLink>
+                  </li>
+                </ul>
+                <ul className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <button className="btn btn-primary" onClick={this.logout}>Logout</button>
                   </li>
                 </ul>
               </div>
             </div>
           </nav>
-
           <Route exact path="/" component={Welcome} />
           <Route path="/endpoint1" component={Endpoint1} />
-
         </div>
-
       </Router>
     )
   }

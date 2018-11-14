@@ -9,21 +9,21 @@ class App extends Component {
     super(props);
     this.state = { LoggedIn: false }
   }
-  logout = () => {
-    facade.logout();
-    this.setState({ loggedIn: false });
-  }
+
   login = (user, pass) => {
     facade.login(user, pass)
       .then(res => this.setState({ loggedIn: true }));
+  }
+  logout = () => {
+    facade.logout();
+    this.setState({ loggedIn: false });
   }
   render() {
     return (
       <div>
         {!this.state.loggedIn ? (<LogIn login={this.login} />) :
           (<div>
-            <LoggedIn />
-            <button onClick={this.logout}>Logout</button>
+            <LoggedIn logout={this.logout} />
           </div>)}
       </div>
     );
