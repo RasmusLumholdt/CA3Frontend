@@ -7,11 +7,8 @@ import Endpoint1 from './Endpoint1';
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
-    this.state = { dataFromServer: "Fetching!!" };
   }
-  componentDidMount() {
-    facade.fetchData().then(res => this.setState({ dataFromServer: res }));
-  }
+
 
   logout = () => {
     this.props.logout();
@@ -51,7 +48,8 @@ class LoggedIn extends Component {
             </div>
           </nav>
           <Route exact path="/" component={Welcome} />
-          <Route path="/endpoint1" component={Endpoint1} />
+          <Route path="/endpoint1" render={() => <Endpoint1 ApiFacade={facade} />} />
+
         </div>
       </Router>
     )

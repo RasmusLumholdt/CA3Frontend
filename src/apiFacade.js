@@ -7,8 +7,6 @@ function handleHttpErrors(res) {
     return res.json();
 }
 
-
-
 class ApiFacade {
     makeOptions(method, addToken, body) {
         var opts = {
@@ -48,9 +46,10 @@ class ApiFacade {
             .then(res => { this.setToken(res.token) })
     }
 
-    fetchData = () => {
-        const options = this.makeOptions("GET", true); //True add's the token
-        return fetch(URL + "/api/info/user", options).then(handleHttpErrors);
+    fetchData = (url) => {
+        console.log("test");
+        const options = this.makeOptions("GET", false); //True add's the token (CHANGE THIS BACK TO TRUE WHEN BACKEND IS FINISHED)
+        return fetch(url, options).then(handleHttpErrors);
     }
 
 }
