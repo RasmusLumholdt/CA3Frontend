@@ -15,7 +15,7 @@ class LogIn extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="container">
                 <h2>Login</h2>
                 <form onSubmit={this.login} onChange={this.onChange} >
                     <input className="form-control" placeholder="User Name" id="username" />
