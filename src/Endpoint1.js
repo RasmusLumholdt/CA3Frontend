@@ -3,37 +3,44 @@ import React from "react";
 class Endpoint1 extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: "" };
+        this.state = { people: [] };
     }
 
     componentDidMount = async () => {
-        this.props.ApiFacade.fetchData("").then(res => this.setState({ data: res }));
+        this.update();
     }
+
+    update = async () => {
+        const json = await this.props.ApiFacade.fetchData("/api/sw/people", false);
+        this.setState({ people: json.results });
+        console.log(this.state.people);
+        console.log(this.state.people.results);
+    }
+
 
     render() {
         return <div>
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Name</th>
-                        <th scope="col">Height</th>
-                        <th scope="col">Mass</th>
-                        <th scope="col">Birth year</th>
-                        <th scope="col">Gender</th>
-                    </tr>
-                </thead>
-                <tbody>
-
-                    {this.data.map((user) =>
-                        <tr key={user.name}>
-                            <td>{user.name}</td>
-                            <td>{user.height}</td>
-                            <td>{user.mass}</td>
-                            <td>{user.birth_year}</td>
-                            <td>{user.gender}</td>
-                        </tr>)}
-                </tbody>
-            </table>
+            {this.state.people.map((el) =>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Height</th>
+                            <th>Mass</th>
+                            <th>Birth year</th>
+                            <th>Home world</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{el.name}</td>
+                            <td>{el.height}</td>
+                            <td>{el.mass}</td>
+                            <td>{el.birth_year}</td>
+                            <td>{el.homeworld}</td>
+                        </tr>
+                    </tbody>
+                </table>)}
         </div>
     }
 }

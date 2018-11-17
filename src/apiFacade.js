@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/jwtbackend";
+const URL = "http://localhost:8080/CA3-Backend";
 
 function handleHttpErrors(res) {
     if (!res.ok) {
@@ -46,10 +46,11 @@ class ApiFacade {
             .then(res => { this.setToken(res.token) })
     }
 
-    fetchData = (url) => {
-        console.log("test");
-        const options = this.makeOptions("GET", false); //True add's the token (CHANGE THIS BACK TO TRUE WHEN BACKEND IS FINISHED)
-        return fetch(url, options).then(handleHttpErrors);
+    fetchData = async (params, tokenBool) => {
+        const options = this.makeOptions("GET", tokenBool); //True add's the token
+        const fetchData = await fetch(URL + params, options);
+        const data = await fetchData.json();
+        return data;
     }
 
 }
