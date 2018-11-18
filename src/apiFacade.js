@@ -1,4 +1,4 @@
-const URL = "http://localhost:8080/jwtbackend";
+const URL = "http://localhost:8084/CA3-Backend";
 
 function handleHttpErrors(res) {
     if (!res.ok) {

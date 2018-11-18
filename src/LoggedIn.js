@@ -7,6 +7,7 @@ import Endpoint1 from './Endpoint1';
 class LoggedIn extends Component {
   constructor(props) {
     super(props);
+    this.state = {};
   }
 
 
@@ -15,6 +16,7 @@ class LoggedIn extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Router>
         <div>
@@ -40,6 +42,7 @@ class LoggedIn extends Component {
                   </li>
                 </ul>
                 <ul className="navbar-nav ml-auto">
+                  <li className="nav-item"><h2 style={{ color: "#ffffff"}}>{this.props.username}</h2></li>
                   <li className="nav-item">
                     <button className="btn btn-primary" onClick={this.logout}>Logout</button>
                   </li>
@@ -47,7 +50,7 @@ class LoggedIn extends Component {
               </div>
             </div>
           </nav>
-          <Route exact path="/" component={Welcome} />
+          <Route exact path="/" render={() => <Welcome username={this.props.username}/>} />
           <Route path="/endpoint1" render={() => <Endpoint1 ApiFacade={facade} />} />
 
         </div>

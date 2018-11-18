@@ -1,8 +1,8 @@
 import React from "react";
 
-const Welcome = () => (
+const Welcome = (props) => (
     <div className="container">
-        <h1>WELCOME TEST</h1>
+        <h1>WELCOME {props.username}</h1>
     </div>
 )
 

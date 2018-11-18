@@ -7,12 +7,12 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { LoggedIn: false }
+    this.state = { LoggedIn: false, username: "" }
   }
 
   login = (user, pass) => {
     facade.login(user, pass)
-      .then(res => this.setState({ loggedIn: true }));
+      .then(res => this.setState({ loggedIn: true, username: user }));
   }
   logout = () => {
     facade.logout();
@@ -21,9 +21,13 @@ class App extends Component {
   render() {
     return (
       <div>
+        {/*
+            Den skal nok have et brugernavn med ind. en anden måde at starte en component på?
+            */}
         {!this.state.loggedIn ? (<LogIn login={this.login} />) :
           (<div>
-            <LoggedIn logout={this.logout} />
+            
+            <LoggedIn logout={this.logout} username={this.state.username} />
           </div>)}
       </div>
     );
