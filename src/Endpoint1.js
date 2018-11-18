@@ -7,16 +7,9 @@ class Endpoint1 extends React.Component {
     }
 
     componentDidMount = async () => {
-        this.update();
-    }
-
-    update = async () => {
         const json = await this.props.ApiFacade.fetchData("/api/sw/people", false);
         this.setState({ people: json.results });
-        console.log(this.state.people);
-        console.log(this.state.people.results);
     }
-
 
     render() {
         return <div className="container">

@@ -1,6 +1,6 @@
 
 
-const URL = "http://localhost:8080/CA3-Backend";
+const URL = "https://skole.rasmuslumholdt.dk/CA3-Backend-1.0-SNAPSHOT";
 
 
 function handleHttpErrors(res) {
