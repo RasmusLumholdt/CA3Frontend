@@ -6,13 +6,8 @@ class Endpoint3 extends React.Component {
         this.state = { data: "" };
     }
     componentDidMount = async () => {
-        this.update();
-    }
-
-    update = async () => {
         const json = await this.props.ApiFacade.fetchData("/api/roles/user", true);
         this.setState({ data: json });
-
     }
 
     render() {
