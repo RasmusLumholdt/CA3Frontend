@@ -19,19 +19,20 @@ class Endpoint1 extends React.Component {
 
 
     render() {
-        return <div>
-            {this.state.people.map((el) =>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Height</th>
-                            <th>Mass</th>
-                            <th>Birth year</th>
-                            <th>Home world</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+        return <div className="container">
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Height</th>
+                        <th>Mass</th>
+                        <th>Birth year</th>
+                        <th>Home world</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.people.map((el) =>
+
                         <tr>
                             <td>{el.name}</td>
                             <td>{el.height}</td>
@@ -39,8 +40,9 @@ class Endpoint1 extends React.Component {
                             <td>{el.birth_year}</td>
                             <td>{el.homeworld}</td>
                         </tr>
-                    </tbody>
-                </table>)}
+                    )
+                    }</tbody>
+            </table>
         </div>
     }
 }
