@@ -3,53 +3,47 @@ import React from "react";
 class Endpoint1 extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { data: "", nextPage: 2 };
+        this.state = { people: [] };
     }
 
     componentDidMount = async () => {
-        this.props.ApiFacade.fetchData("http://localhost:8084/CA3-Backend/api/sw/people/?page=1").then(res => this.setState({ data: res }));
-    }
-    getNextPage = async () => {
-        this.props.ApiFacade.fetchData("http://localhost:8084/CA3-Backend/api/sw/people/?page=" + this.state.nextPage).then(res => this.setState({ data: res }));
-        this.setState({nextPage: this.state.nextPage+1});
+        this.update();
     }
 
+    update = async () => {
+        const json = await this.props.ApiFacade.fetchData("/api/sw/people", false);
+        this.setState({ people: json.results });
+        console.log(this.state.people);
+        console.log(this.state.people.results);
+    }
+
+
     render() {
-        console.log(this.state.data.results);
-        console.log(this.state.nextPage);
-        if(this.state.data === "") {
-            return <h1>Loading...</h1>;
-        }
-        else {
-            return <div>
-                <table className="table">
-                    <thead>
+        return <div className="container">
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Height</th>
+                        <th>Mass</th>
+                        <th>Birth year</th>
+                        <th>Home world</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {this.state.people.map((el) =>
+
                         <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Height</th>
-                            <th scope="col">Mass</th>
-                            <th scope="col">Birth year</th>
-                            <th scope="col">Gender</th>
+                            <td>{el.name}</td>
+                            <td>{el.height}</td>
+                            <td>{el.mass}</td>
+                            <td>{el.birth_year}</td>
+                            <td>{el.homeworld}</td>
                         </tr>
-                    </thead>
-                    
-                    <tbody>
-                        {this.state.data.results.map((user) =>
-                            <tr key={user.name}>
-                                <td>{user.name}</td>
-                                <td>{user.height}</td>
-                                <td>{user.mass}</td>
-                                <td>{user.birth_year}</td>
-                                <td>{user.gender}</td>
-                            </tr>)}
-                    </tbody>
-                </table>
-                <a href="#"onClick={() => this.getNextPage(this.state.page)}>Next</a>
-                <p>Page {this.state.nextPage-1}</p>
-                
-            </div>
-        }
-        
+                    )
+                    }</tbody>
+            </table>
+        </div>
     }
 }
 
