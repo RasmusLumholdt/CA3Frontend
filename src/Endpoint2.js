@@ -7,10 +7,10 @@ class Endpoint1 extends React.Component {
     }
 
     componentDidMount = async () => {
-        this.props.ApiFacade.fetchData("http://localhost:8084/CA3-Backend/api/sw/people/?page=1").then(res => this.setState({ data: res }));
+        this.props.ApiFacade.fetchData("/api/sw/people/?page=1").then(res => this.setState({ data: res }));
     }
     getNextPage = async () => {
-        this.props.ApiFacade.fetchData("http://localhost:8084/CA3-Backend/api/sw/people/?page=" + this.state.nextPage).then(res => this.setState({ data: res }));
+        this.props.ApiFacade.fetchData("/api/sw/people/?page=" + this.state.nextPage).then(res => this.setState({ data: res }));
         this.setState({ nextPage: this.state.nextPage + 1 });
 
     }
@@ -30,7 +30,7 @@ class Endpoint1 extends React.Component {
             return <h1>Loading...</h1>;
         }
         else {
-            return <div>
+            return <div className="container">
                 <table className="table">
                     <thead>
                         <tr>
@@ -53,7 +53,7 @@ class Endpoint1 extends React.Component {
                             </tr>)}
                     </tbody>
                 </table>
-                <a href="#" onClick={() => this.getNextPage(this.state.page)}>Next</a>
+                <a className="btn btn-primary" href="#" onClick={() => this.getNextPage(this.state.page)}>Next</a>
                 <p>Page {this.state.nextPage - 1}</p>
 
             </div>

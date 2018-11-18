@@ -33,7 +33,7 @@ class Endpoint1 extends React.Component {
                 <tbody>
                     {this.state.people.map((el) =>
 
-                        <tr>
+                        <tr key={el.name}>
                             <td>{el.name}</td>
                             <td>{el.height}</td>
                             <td>{el.mass}</td>
